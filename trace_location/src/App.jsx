@@ -38,7 +38,13 @@ function App() {
     e.preventDefault();
     setPincode(e.target.value);
   };
-
+  const centeredStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // flexDirection: 'column',
+    marginTop:"10px"
+  };
   return (
     <Container>
       <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
@@ -58,12 +64,13 @@ function App() {
           Search
         </Button> */}
         {error && <Error error={error} />}
-        {loading ?( <Oval
+        {loading ?(<div style={centeredStyle}> <Oval
           type="Oval" // Specify "Oval" for an oval loader
           color="#00BFFF" // Customize the loader color
           height={100} // Set the loader height
-          width={100} // Set the loader width
-        />):<LocationInfo location={location} />}
+          width={100}
+ // Set the loader width
+        /></div>):<LocationInfo location={location} />}
         <Button
           variant="contained"
           color="primary"
