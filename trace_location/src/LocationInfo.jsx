@@ -1,6 +1,8 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 
+// import {Oval} from  'react-loader-spinner'
+
 const LocationInfo = ({ location }) => (
   <div>
     <Typography style={{ padding: '20px', marginTop: '5px',fontSize:"2rem" }} variant="h6">Location Details</Typography>

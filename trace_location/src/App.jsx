@@ -35,6 +35,7 @@ function App() {
   }, [pincode]);
 
   const handlePincodeChange = (e) => {
+    e.preventDefault();
     setPincode(e.target.value);
   };
 
