@@ -34,7 +34,7 @@ function App() {
   return (
     <Container>
       <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
-        <Typography variant="h5">ZIP Code Locator</Typography>
+        <Typography style={{ padding: '20px', marginBelow: '20px'}} variant="h5">Your Location</Typography>
         <TextField
           label="Enter Pin Code"
           variant="outlined"
@@ -55,7 +55,7 @@ function App() {
           variant="contained"
           color="primary"
           onClick={() => setLocation("")}
-          style={{ marginTop: '10px' }}
+          style={{ marginTop: '10px',marginLeft:"10px" }}
         >
         Clear Data
   </Button>
