@@ -5,11 +5,17 @@ import axios from 'axios';
 import { Container, TextField, Button, Paper, Typography } from '@mui/material';
 import LocationInfo from './LocationInfo'; // Import LocationInfo component
 import Error from './Error'; // Import Error component
+// import {TailSpin} from 'react-loader-spinner';
+
+import {Oval} from  'react-loader-spinner'
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 
 function App() {
   const [pincode, setPincode] = useState('');
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
+  const[loading,setLoading]=useState(true);
 
   useEffect(() => {
     if (pincode) {
@@ -19,6 +25,7 @@ function App() {
           setLocation(response.data);
           console.log(location);
           setError(null);
+          setLoading(false);
         })
         .catch((err) => {
           setLocation(null);
@@ -50,7 +57,12 @@ function App() {
           Search
         </Button> */}
         {error && <Error error={error} />}
-        {location && <LocationInfo location={location} />}
+        {loading ?( <Oval
+          type="Oval" // Specify "Oval" for an oval loader
+          color="#00BFFF" // Customize the loader color
+          height={100} // Set the loader height
+          width={100} // Set the loader width
+        />):<LocationInfo location={location} />}
         <Button
           variant="contained"
           color="primary"
