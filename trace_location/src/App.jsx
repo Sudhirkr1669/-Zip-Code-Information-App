@@ -12,32 +12,50 @@ import {Oval} from  'react-loader-spinner'
 
 
 function App() {
-  const [pincode, setPincode] = useState('');
+  // const [pincode, setPincode] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  // const [isValidPostalCode, setIsValidPostalCode] = useState(false);
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
-  const[loading,setLoading]=useState(true);
+  const[loading,setLoading]=useState(false);
+  
+  const handlePincodeChange = (e) => {
+    e.preventDefault();
+    // setPincode(e.target.value);
+    const inputValue=e.target.value;
+       setPostalCode(inputValue);
+    // const postalCodeRegex = /^\d{6}$/;
+    //  setIsValidPostalCode(postalCodeRegex.test(postalCode));
+   
 
-  useEffect(() => {
-    if (pincode) {
+   
+  };
+  // useEffect(()=>{
+
+  //   setPostalCode(inputValue);
+  //   setIsValidPostalCode(isValid);
+  //  },[])
+
+  
+   useEffect(()=>{
+    if (postalCode) {
       axios
-        .get(`https://api.zippopotam.us/in/${pincode}`)
+        .get(`https://api.zippopotam.us/in/${postalCode}`)
         .then((response) => {
           setLocation(response.data);
           console.log(location);
           setError(null);
-          setLoading(false);
+          {response.data && setLoading(false)};
         })
         .catch((err) => {
           setLocation(null);
           setError('Error fetching location data. Please check the pin code.');
+          setLoading(true)
         });
     }
-  }, [pincode]);
+   },[postalCode]) 
 
-  const handlePincodeChange = (e) => {
-    e.preventDefault();
-    setPincode(e.target.value);
-  };
+  
   const centeredStyle = {
     display: 'flex',
     justifyContent: 'center',
@@ -45,6 +63,7 @@ function App() {
     // flexDirection: 'column',
     marginTop:"10px"
   };
+ 
   return (
     <Container>
       <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
@@ -52,7 +71,7 @@ function App() {
         <TextField
           label="Enter Pin Code"
           variant="outlined"
-          value={pincode}
+          value={postalCode}
           onChange={handlePincodeChange}
         />
         {/* <Button
@@ -70,11 +89,11 @@ function App() {
           height={100} // Set the loader height
           width={100}
  // Set the loader width
-        /></div>):<LocationInfo location={location} />}
+        /></div>):(location && <LocationInfo location={location} />)}
         <Button
           variant="contained"
           color="primary"
-          onClick={() => setLocation("")}
+          onClick={()=>setPostalCode("")}
           style={{ marginTop: '10px',marginLeft:"10px" }}
         >
         Clear Data
